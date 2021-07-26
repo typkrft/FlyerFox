@@ -1,14 +1,23 @@
 /*=============================================================================*
- *                               ONELINE PROTON                                *
+ *                              F L Y E R F O X                                *
  *                                                                             *
- * description    : An oneline userChrome.css theme for Firefox, which aims to *
+ * description    : FlyerFox - An opinionated Firefox userChrome.css,          *
+ *                  optimized for macOS. Bret Michael's slider is still in     *
+ *                  beta unfortunately.                                        *
  *                  keep the Proton experience.                                *
  * compatibility  : Firefox 89+                                                *
- * repository     : https://github.com/lr-tech/OnelineProton/                  *
+ * Forked From    : https://github.com/lr-tech/OnelineProton/                  *
+ * Repository     : https://github.com/typkrft/FlyerFox/                       *
  *                                                                             *
- * THANKS FOR USING MY USERCHROME! <3                                          *
+ * THANKS FOR USING OUR USERCHROME! <3                                         *
  *============================================================================*/
-
+ /* 
+  N O T E : 
+  You might be better off disabling things in testing. 
+  There are a number of quirks and things that I am still working through. 
+  If you have an addition or a fix please let me know. I am not a CSS dev, but I
+  will try to help and resolve issues when possible. 
+ */
 
 /* S E T T I N G S */
 
@@ -17,39 +26,38 @@
   --animationSpeed  : 0.15s;
 }
 
-
 /* H I D I N G   E L E M E N T S */
 /* Comment or uncomment depending of what elements you want to hide */
 
 /* Back button */
-/* #back-button {display: none !important} */
+#back-button {display: none !important}
 
 /* Hide back button only when disabled */
-#back-button[disabled="true"] {display: none !important}
+/* #back-button[disabled="true"] {display: none !important} */
 
 /* Forward button */
-/* #forward-button {display: none !important} */
+#forward-button {display: none !important}
 
 /* Hide forward button only when disabled */
-#forward-button[disabled="true"] {display: none !important}
+/* #forward-button[disabled="true"] {display: none !important} */
 
 /* "Shield" icon */
-#tracking-protection-icon-container {display: none !important}
+/* #tracking-protection-icon-container {display: none !important} */
 
 /* Site information button */
-#identity-box {display: none !important}
+/* #identity-box:not(:hover) {display: none !important} */
 
 /* This is the "Search with" indicator on the urlbar */
-/* #urlbar-search-mode-indicator {display: none !important} */
+#urlbar-search-mode-indicator {display: none !important}
 
 /* Zoom button */
-/* #urlbar-zoom-button {display: none !important} */
+#urlbar-zoom-button {display: none !important}
 
 /* Page action (right three dash button) */
-/* #pageActionButton {display: none !important} */
+#pageActionButton {display: none !important}
 
 /* These are the buttons on the right of the urlbar */
-/* #page-action-buttons {display: none !important} */
+#page-action-buttons {display: none !important}
 
 /* #urlbar-label-box {display: none !important} */
 
@@ -137,3 +145,257 @@ tab[visuallyselected] .tab-background::before,
 .tab-close-button {
   animation        : var(--animationSpeed) !important;
 }
+
+/* F L Y E R F O X  A D D I T I O N A L  S E T T I N G S */
+
+/* A D D I T I O N A L  S E T T I N G S */
+
+/* Hide (x) (-) (+) on macOS */
+hbox.titlebar-buttonbox-container:nth-child(4) {visibility: collapse !important;}
+
+/* Hide Spacer between URL and Tabs */
+hbox.titlebar-spacer:nth-child(1) {visibility: collapse !important;}
+
+/* Hide Spacer after Tabs */
+hbox.titlebar-spacer:nth-child(3) {visibility: collapse !important;}
+
+/* Hide Overflow Arrows on either side of the tabs section when not active */
+#scrollbutton-up[disabled="true"] {opacity: 0 !important;}
+#scrollbutton-down[disabled="true"] {opacity: 0 !important;}
+
+/* Hide 'This time, search with:' Section */
+.search-one-offs {
+	visibility: collapse;
+	margin: 0 !important;
+	padding-top: 0px;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+#urlbar .search-one-offs:not([hidden]) {display: contents !important;}
+
+/* Keep Borders Hidden on the Sides of the URL Bar */
+#nav-bar{
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+}
+
+/* Focused URL Bar Takes 100% width */
+#urlbar[focused="true"] {
+	display: block !important;
+	position: fixed !important;
+	width: 100% !important;
+	height: var(--urlbar-height);
+	top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2);
+	left: 0;  
+  z-index: 10
+}
+
+/* R A D I U S */
+
+/* Radius of Hover in DropDown Extention Panel */
+:root { --arrowpanel-menuitem-border-radius: 0px !important }
+
+/* Tabs Corner Radius */
+:root { --tab-border-radius: 0px !important }
+
+/* URL Bar Corner Radius */
+:root {	--toolbarbutton-border-radius: 0px !important }
+
+/* Icons in the URL Bar liek the Shield Corner Raidus  */
+:root { --urlbar-icon-border-radius: 0px !important }
+
+/* Extention Panel, Hambuger Menu, and Extension Menus Corner Radius */
+:root {	--arrowpanel-border-radius: 0px !important }
+
+
+/* A U T O  H I D E */
+/* Uncomment relavent Sections */
+
+/* Configuration 1 - START */
+/* Hide Unless focused with CMD/Ctrl - L or In a New Tab */
+/* Adapted from https://superuser.com/a/1497982/1189696 */
+
+/* @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+ */
+
+#navigator-toolbox:not(:hover) {
+  height: 4px !important; /* Adjusts gap to hover over */
+  min-height: 0px !important;
+  overflow: hidden !important;
+}
+
+#navigator-toolbox:focus,
+#navigator-toolbox:focus-within,
+#navigator-toolbox:active,
+#urlbar[focused="true"] {
+  height: auto !important;  
+  overflow: visible !important;
+} 
+/* Configuration 1 - END */
+
+/* Configuration 2 - Start */
+/* Tree Style Tabs Autohide */
+/* Hide splitter, when using Tree Style Tab. */
+/* Take From https://www.reddit.com/r/FirefoxCSS/comments/emjqx2/autohide_tree_style_tabs/fdpck8l?utm_source=share&utm_medium=web2x&context=3 */
+
+/* #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+  display: none !important;
+} */
+
+/* Hide sidebar header, when using Tree Style Tab. */
+/* #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  visibility: collapse;
+} */
+
+/* Shrink sidebar until hovered, when using Tree Style Tab. */
+/* #sidebar-box:not([sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]) {
+  min-width: var(--wide-tab-width) !important;
+  max-width: none !important;
+}
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] {
+  overflow: hidden !important;
+  position: relative !important;
+  transition: all 200ms !important;
+  min-width: var(--thin-tab-width) !important;
+  max-width: var(--thin-tab-width) !important;
+  z-index: 1;
+}
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"]:hover,
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar {
+  transition: all 200ms !important;
+  min-width: var(--wide-tab-width) !important;
+  max-width: var(--wide-tab-width) !important;
+  margin-right: calc((var(--wide-tab-width) - var(--thin-tab-width)) * -1) !important;
+  z-index: 1;
+} */
+
+/* :root { --thin-tab-width: 10px; }
+:root { --wide-tab-width: 250px; } */
+/* Configuration 2 - END */
+
+
+/* T E S T I N G */
+/* Hide Cover Tab Bar Focused URL Bar */
+#urlbar[focused="true"], #searchbar[focused="true"] {
+	min-height: 40px;
+}
+
+/* R I G H T  C L I C K  M E N U S */
+/* Some or all of this is likely macOS specific */
+
+/* Global */
+
+/* Remove Themeing */
+menupopup,
+menuitem,
+menu {
+  -moz-appearance: none !important;
+}
+
+/* Softens the Menu Separator in Right Click Menus */
+menupopup menuseparator {
+  -moz-appearance: meter !important;
+}
+
+/* Corners */
+.panel-arrowcontent,
+#alltabs-popup .arrowscrollbox-scrollbox,
+menupopup:not(#BMB_bookmarksPopup),
+.textbox-contextmenu {
+  border-radius: 0px !important;
+}
+
+/* Right Click Menu */
+
+/*  Sets Background Color, Text Color, and Opacity  */
+#mainPopupSet menupopup {
+  color: var( --lwt-toolbar-field-color); /* Text Color */
+  background-color: var(--autocomplete-popup-highlight-background) !important; /*This is the right click menu color*/
+  opacity: 0.95;
+}
+
+/* Color of hovered menu item */
+menu[_moz-menuactive="true"], menuitem[_moz-menuactive="true"] {
+  background-color: var(--lwt-toolbarbutton-icon-fill-attention) !important;
+}
+
+/* Side Panel Header Drop Down */
+image.panel-arrow {
+  color: var(--autocomplete-popup-highlight-background) !important; /*This is the right click menu color of the little arrow */
+}
+
+/* Side Panel Drop Down Menu Hover Color */
+.subviewbutton:hover {
+  background-color: var(--lwt-toolbarbutton-icon-fill-attention) !important
+}
+
+box.panel-arrowcontent{ 
+  color:var(--lwt-tab-text, var(--toolbar-color)) !important; /* Text Color */
+  background: var(--autocomplete-popup-highlight-background) !important; /*This is the right click menu color*/
+  box-shadow:  var(--autocomplete-popup-highlight-background) !important; 
+  opacity: 0.95;
+}
+
+/* context menus in the ui like the url bar */
+arrowscrollbox.menupopup-arrowscrollbox {
+  color:var(--lwt-tab-text, var(--toolbar-color)) !important; /* Text Color */
+  background: var(--autocomplete-popup-highlight-background) !important; /*This is the right click menu color*/
+  box-shadow:  var(--autocomplete-popup-highlight-background) !important; 
+  opacity: 0.95;
+  border-radius: 5px !important;
+}
+
+image.panel-arrow {
+	fill: var(--autocomplete-popup-highlight-background) !important;
+	stroke:  var(--autocomplete-popup-highlight-background) !important;
+}
+
+/* V I B R A N C Y */
+
+/* Turn on Vibrancy aka macOS Transparency and Blur in the URL Bar, Nav Bar, and Side
+Panel, Findbar, and Bookmarks Bar */
+#main-window,
+#nav-bar,
+#sidebar-header,
+#history-panel,
+#sidebar-search-container,
+#bookmarksPanel,
+#PersonalToolbar,
+findbar {
+  -moz-appearance: -moz-mac-vibrancy-dark !important;
+}
+
+/* Selected Tab Background Color */
+.tab-background[selected="true"] {
+  background: var(--autocomplete-popup-highlight-background) !important;
+  opacity: 0.8;
+}
+
+/* Various Opacities */
+#appMenu-popup,
+#customizationui-widget-panel,
+#pageActionPanel,
+#editBookmarkPanel,
+#protections-popup,
+#pageActionActivatedActionPanel,
+#widget-overflow,
+#urlbar-background,
+#identity-popup,
+.panel-arrowcontent,
+menupopup[hasbeenopened="true"] {
+  opacity: 0.95;
+}
+
+/* Bar between the bookmarks bar and the page  */
+#sidebar-splitter {
+  border: none !important;
+  opacity: 1 !important;
+  -moz-appearance: -moz-mac-vibrancy-dark !important;
+}
+
+/* Possible Bug Fix Keeps sidebar from being weirdly affected by vibrancy settings in find bar*/
+findbar {
+  opacity: 0.9 !important;
+}
+
+#main-window{ background-color: transparent !important }
