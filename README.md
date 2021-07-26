@@ -1,6 +1,6 @@
 # F L Y E R F O X
 
-_An oneline userChrome.css theme for Firefox, which aims to keep the Proton experience._
+_An opinionated Firefox userChrome.css optimized for macOS. Bret Michael's slider is still in beta unfortunately._
 
 ![FlyerFox Tool Bars Hidden](screenshot_0.png)
 ![FlyerFox URL Bar & Tab Bar Shown](screenshot_1.png)
@@ -9,7 +9,12 @@ _An oneline userChrome.css theme for Firefox, which aims to keep the Proton expe
 
 ## Features
 
-
+- **Minimal**: No toolbars unless you want them. When they are shown they try not to be greedy.
+- **Practical**: Cmd|Ctrl - L or hover to focus the URL and Tab Bar.
+- **Clean**: Many elements are hidden until they need to be see.
+- **Flexible**: Support for compact, normal, and touch densities.
+- **Themeable**: You can still using custom themes with full compatibility.
+- **Customizable**: You are able to change settings like navbar's width, animation speed, and hidden elements at the top of the userChrome.css file.
 
 
 ## Installation
@@ -40,3 +45,14 @@ _An oneline userChrome.css theme for Firefox, which aims to keep the Proton expe
 /* This is the "Search with" indicator on the urlbar */
 /* #urlbar-search-mode-indicator {display: none !important} */
 ```
+## Projects I Like 
+- **Pywal Fox**: ![Frewacom/pywalfox](https://github.com/Frewacom/pywalfox) 
+   - A Dynamic Theme Color Scheme for Firefox which uses Pywal as a backend.
+- **Pywal**: ![dylanaraps/pywal](https://github.com/dylanaraps/pywal)  
+   - A Tool Used to Generate Color Themes for Almost Everything and Farm Karma on ![r/UnixPorn](https://www.reddit.com/r/unixporn)
+- **SpaceBar**: ![cmacrae/spacebar](https://github.com/cmacrae/spacebar)
+   - A Status Bar for Yabai.
+- **Yabai**: ![koekeishiya/yabai](https://github.com/koekeishiya/yabai)
+   - A Tiling Window Manager for macOS. 
+### Feel free to donate to any of these great projects or to your favorite charity. 
+
