@@ -1,18 +1,15 @@
-# Oneline Proton
+# F L Y E R F O X
 
 _An oneline userChrome.css theme for Firefox, which aims to keep the Proton experience._
 
-![Oneline Proton screenshot](screenshot.png)
+![FlyerFox Tool Bars Hidden](screenshot_0.png)
+![FlyerFox URL Bar & Tab Bar Shown](screenshot_1.png)
+![FlyerFox 100% Width URL Bar](screenshot_2.png)
 
 
 ## Features
 
-- **Minimal**: Oneline Proton has been made trying to keep all the Proton experience, but with a cleaner interface.
-- **Practical**: The oneline interface allows you to keep a higher visible space and focus on what matters.
-- **Clean**: back/forward buttons keep hidden when disabled, and some url icons are hidden until you hover them.
-- **Flexible**: Support for compact, normal, and touch densities.
-- **Themeable**: You can still using custom themes with full compatibility.
-- **Customizable**: You are able to change settings like navbar's width, animation speed, and hidden elements at the top of the userChrome.css file.
+
 
 
 ## Installation
@@ -43,4 +40,3 @@ _An oneline userChrome.css theme for Firefox, which aims to keep the Proton expe
 /* This is the "Search with" indicator on the urlbar */
 /* #urlbar-search-mode-indicator {display: none !important} */
 ```
-
